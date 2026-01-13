@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward" />
+    
+    <!-- SLIDER IMPORT FROM JS-->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
+    
+    <!--DONE-->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
+    <link rel="stylesheet" href="styles.css">
+
+    <title> PORTFOLIO </title>
+
+</head>
+<body>
+
+
+    
+
+    <!-- NAVBAR-->
+    <nav>
+        <div class="left">
+            <a href="/"> Aditya Choudhary</a>
+    </div>
+
+
+
+        <div class="right">
+
+        <a href="https://github.com/Aditya-Choudhary-gh" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-github"></i>
+        <span>Github</span>
+        
+        
+            <a href="https://www.linkedin.com/in/aditya-choudhary-737608376/" target="_blank" rel="noopener
+            noreferrer">
+        <i class="fa-brands fa-square-linkedin"></i>
+        <span>Linkedin</span>
+
+            <a href="mailto:aadi15082007@gmail.com">
+        <i class="fa-solid fa-envelope"></i>
+        <span>Email</span>
+
+           
+        </a>
+     </div>
+    </nav>
+
+    <main>
+
+
+
+        <!-- SECTION 1: Hero -->
+         <section class="hero-section">
+            <div class="text">
+                <h2> Hey, I'm Aditya Choudhary ! </h2>
+                <P>A TECH-savvy computer science undergraduate at UPES , Dehradun , currently in my second semester . Proficient in C , I'm currently exploring C++ , python fundamentals and front-end development. I'm into sports as kill-time alongside some music.</P>
+
+                <div class="links">
+                    <a href="#skills">
+                        <i class="fa-solid fa-code"></i>
+                        <span>Skills</span>
+                    </a>
+                    <a href="#Projects">
+                        <i class="fa-solid fa-pen"></i>
+                        <span>Projects</span>
+                    </a>
+                    <a href="#Contact">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>Contact</span>
+                    </a>
+                </div>
+            </div>
+
+
+
+
+            <div class="headshot">
+            <img src="portfolio image final.webp">
+            </div>
+         </section>
+
+        <!-- SECTION 2: Skills -->
+         <section id="skills" class="skills-section">
+            <h2>Skills</h2>
+
+
+
+            <div class="cells">
+               <div class ="cell">
+                <img src="cvwzpswvfnwnwyiqbszw.webp" alt="html logo">
+                <span>HTML</span>
+               </div> 
+
+               <div class ="cell">
+                <img src="ggzqfxvudumkixb3hek7.webp" alt="css logo">
+                <span>CSS</span>
+               </div> 
+
+               <div class ="cell">
+                <img src="tdz4a2ggezd7ghs8fjrr.webp" alt="js logo">
+                <span>JavaScript</span>
+               </div> 
+
+               <div class ="cell">
+                <img src="letter-c.webp" alt="C logo">
+                <span>  C Language</span>
+               </div> 
+
+               <div class ="cell">
+                <img src="shell scripting.webp" alt="Shell scripting">
+                <span> Shell Scripting </span>
+                </div>
+
+               
+
+            </div>
+        </section>
+
+        <!-- SECTION 3: Projects -->
+        <div> <section class="projects-section" id="Projects" >
+            <h2>Projects</h2>
+        </div>
+
+        <div class="container swiper">
+                <ul class="card-list swiper-wrapper">
+                   
+                    <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                           <img src="Gemini_Generated_Image_22t85322t85322t8.png"card-image" class="card-image">
+                           <p class="badge">C/C++</p>
+                           <h2 class="card-title"> KEYCHEEKY </h2>
+                           <p class="card-descripition"> A password manager engineered to deliever exceptional security and refined user experience using bitwise XOR encryption alonside seamless accesibility </p>
+                           <button class="card-button material-symbols-outlined" onclick="window.open('https://github.com/Aditya-Choudhary-gh/KeyCheeky' , '_blank')">arrow_forward</button>
+                           <span class="action-text">Github</span>
+                        </a>
+                    </li>
+                    <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                           <img src="port-final.webp" alt="card-image" class="card-image">
+                           <p class="badge">HTML/CSS/JavaScript</p>
+                           <h2 class="card-title"> MY PORTFOLIO </h2>
+                           <p class="card-descripition"> A fully personal portfolio to describe my work and tech-stack . Built with a responsive design and a clean user interface using diffrent languages. </p>
+                           <div class="card-actions">
+                           <button class="card-button material-symbols-outlined">arrow_forward</button>
+                           <span class="action-text">Github</span>
+                           <button class="card-button material-symbols-outlined secondary">arrow_forward</button>
+                           <span class="action-text">Live Demo</span>
+                           </div>
+                        </a>
+                    </li>
+                     <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                           <img src="youtube-logo.avif" alt="card-image" class="card-image">
+                           <p class="badge">HTML/CSS</p>
+                           <h2 class="card-title"> Youtube Clone </h2>
+                           <p class="card-descripition"> A free hand youtube website layout with a front home web page designed to feel as likewise to youtube.com as possible with the same color and motion graphics. </p>
+                           
+                           
+                           
+                           <div class="card-actions">
+                            
+                           <button class="card-button material-symbols-outlined" onclick="window.open('https://github.com/Aditya-Choudhary-gh/YOUTUBE_CLONE' , '_blank')">arrow_forward</button>
+                           <span class="action-text">Github</span>
+                           <button class="card-button material-symbols-outlined secondary" onclick="window.open('https://aadi-youtube-clone.vercel.app/' , '_blank')">arrow_forward</button>
+                           <span class="action-text">Live Demo</span>
+                           </div>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="swiper-pagination"></div>
+                <div class="swiper-slide-button swiper-button-prev"></div>
+                <div class="swiper-slide-button swiper-button-next"></div>
+
+
+            </div>
+        </div>
+
+
+
+
+
+        <!-- SECTION 4: Contact -->
+         <section id="Contact" class="contact-section">
+            <h2>Contact</h2>
+
+            <div class="group">
+                <div class="text">
+                    Feel free to connect with me for any queries or oppurtunities. I wish to get back to you as soon as possible.
+                </div>
+
+                <form action="https://formsubmit.co/aadi15082007@gmail.com" method="POST">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Message</label>
+                    <textarea  id="message" name="message" required></textarea>
+
+                    <button type="submit">Send Message</button> 
+
+                    <input type="hidden" name="_subject" value="New Portfolio Contact Message">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+
+                </form>
+            </div>
+        </section>
+
+
+        <!--Linking swiper JS script -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+        <!--linking custom script-->
+        <script src="script.js"></script>
+
+
+</body>
+</html>

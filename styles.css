@@ -1,0 +1,605 @@
+:root {
+    --text-color: #1a1c20;
+    --link-color: #000000;
+    --background-color: #ffdab9;
+    
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+
+    background-image: url("illustrationjpg.jpg"); 
+    background-size: cover;      
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    opacity: 90px;
+
+
+    font-family: 'poppins' , sans-serif;
+    background-color: var(--background-color);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+/* NAVBAR */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    height: 80px;
+}
+
+
+
+nav .left a {
+     color: var(--text-color);
+     font-size: 22px;
+     font-weight: 600;
+}
+
+
+
+
+nav .right a {
+     display: inline-flex;
+     gap: 6px;
+     line-height: 2;
+     align-items: center;
+     color: var(--text-color);
+     margin: 0 10px;
+     position: relative;
+     cursor: pointer;
+     padding-bottom: 4px ;
+     
+     
+}
+
+nav .right a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #000000;
+    transition: width 0.3s linear;
+}
+
+nav .right a:hover::after {
+    width: 100%;
+}
+
+nav .right a:hover{
+    transition: linear;
+}
+
+
+nav .right a:last-child {
+    color: var(--background-color);
+    background-color: var(--text-color);
+    padding: 5px 15px;
+    border-radius: 5px;
+    
+}
+
+nav .right a span {
+    margin-left: 5px;
+    
+}
+
+/* SECTION 1 : Hero */
+.hero-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    margin: 0;
+    align-items: center;
+    gap: 40px;
+    min-height: 100vh;
+    padding-top: 20px;
+
+}
+
+
+.hero-section .text {
+    flex: 5;
+}
+.hero-section .text h2 {
+    font-size: 45px;
+    margin-top: 0;
+}
+
+.hero-section .text .links {
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.hero-section .text .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border: 2px solid var(--link-color);
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    margin-right: 10 px;
+    margin-bottom: 10 px;
+    transition: .3s;
+}
+
+
+
+.hero-section .text .links a:hover {
+    background-color:#1a1c20;
+    color:#eeeff1;
+    
+
+}
+
+
+
+
+
+
+.hero-section .headshot {
+    flex: 2;
+    display: flex;
+    justify-content: right;
+}
+
+
+.hero-section .headshot img {
+    width: 380px ;
+    border-radius: 15%;
+    border-color: 4px solid #000000;
+     padding: 4px;            
+    background-color: #000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}   
+
+
+
+
+
+/* SECTION 2: Skills */
+.skills-section {
+    padding: 0 50px;
+    margin-bottom: 100px;
+}
+
+
+
+.skills-section h2 {
+    text-align: center;
+    font-size: 45px;
+    margin-bottom: 50px;
+}
+
+.skills-section .cells {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+.skills-section .cells .cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 240px;
+    padding: 16px 26px;
+    margin: 10px;
+    border: 1.5px solid #1a1c20;
+    border-radius: 5px;
+    border: 2px solid var(--link-color);
+    transition: 0.3s;
+}
+
+
+.skills-section .cells .cell:hover {
+    background-color:#1a1c20;
+    color:#eeeff1;
+    cursor: pointer;
+}
+
+
+.skills-section .cells .cell img {
+    width: 38px;
+    height: 38px;
+    border-radius: 2px;
+    object-fit: contain;
+}
+
+.skills-section .cells .cell span {
+    font-size: 20px;
+    
+}
+
+
+/* SECTION 3: Projects */
+    .projects-section {
+        padding: 0 50px;
+        margin-bottom: 50px;
+        text-align:center;
+        font-size: 30px;
+
+    }
+
+
+    .card-wrapper {
+        max-width: 1100px;
+        margin: 0 60px 35px;
+        padding: 20px 10px;
+        
+    }
+
+    .card-list .card-item {
+        list-style: none;
+    }
+
+    .card-list .card-item .card-link{
+        max-width: 520px;
+        display: block;
+        min-height: 520px;
+        height: auto;
+        background: transparent; 
+        border-radius: 12px;
+        text-decoration: none;
+        border: 2px solid black;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+        transition: 0.2s ease;
+        padding: 18px 28px;
+        width: 100%;
+        
+    }
+
+    .card-list .card-link {
+        gap: 20px;
+    }
+
+
+    .card-list .card-item .card-link:active {
+        cursor: grabbing;
+    }
+
+
+    .card-list .card-item .card-link:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+        border: 2px solid black;
+        background-color: black;
+        color: #dde4ff;
+    }
+
+    .card-list .card-link .card-image{
+        width: 100%;
+        aspect-ratio: 16/9;
+        object-fit:cover;
+        border-radius: 10px;
+    }
+
+    .card-list .card-link .badge {
+        color: #000000;
+        padding: 8px 16px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        margin: 16px 0 18px;
+        background: #ffffff;
+        width: fit-content;
+        border-radius: 50px;
+        margin-top: auto;
+         
+    }
+
+        .card-list .card-link .card-button {
+            height: 35px;
+            width: 35px;
+            color: black;
+            border-radius: 50%;
+            margin: 30px 0 5px;
+            background: none;
+            cursor: pointer;
+            border: 2px solid black;
+            transform: rotate(-45deg);
+            transition: 0.4s ease;
+            flex-grow: 1;
+            
+        }
+
+        
+
+
+
+        .card-link:hover .card-button{
+            color: black;
+            background: white;
+        }
+
+        .card-wrapper .swiper-pagination-bullet {
+            height: 13px;
+            width: 13px;
+            opacity: 0.5s;
+            background: #000;
+        }
+
+        .card-wrapper .swiper-pagination-bullet-active {
+            opacity: 1;
+        }
+
+        @media screen and (max-width: 768px) {
+            .card-wrapper {
+                margin: 0 10px 25px;
+            }
+        }
+
+        
+        @media (max-width: 240px) {
+            .card-button {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            padding: 0 18px;
+        }
+
+        
+
+
+/* SECTION 4: Contact */
+    .contact-section {
+        padding: 0 50px;
+        margin-bottom: 100px;
+        padding-top: 50px;
+    }
+
+    .contact-section h2 {
+        font-size: 35px;
+    }
+
+    .contact-section .group {
+        display: flex;
+        gap: 50px;
+    }
+
+
+    .contact-section .group .text {
+        flex: 3;
+    }
+
+
+    .contact-section .group form {
+        flex: 3;
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .contact-section .group form input,
+    .contact-section .group form textarea {
+        font-family: 'Poppins' , sans-serif;
+        border: 2px solid var(--text-color);
+        background-color: transparent;
+        padding: 10px;
+        margin-bottom: 15px;
+        outline: none;
+        resize: none;
+    }
+    
+    .contact-section .group form button {
+        font-size: 16px;
+        font-family: 'poppins' , sans-serif;
+        color: #fff;
+        background-color: var(--text-color);
+        border: none;
+        height: 50px;
+        cursor: pointer;
+        transition: 1s;
+    }
+
+
+    .contact-section .group form button:hover {
+        filter: brightness(.9);
+    }
+
+
+
+
+@media (max-width: 850px) {
+    /* SECTION 1: HERO */
+    .hero-section .text h2 {
+        font-size: 35px ;
+    }
+}
+
+@media (max-width: 740px) {
+    /* SECTION 1: HERO */
+    .hero-section {
+        flex-direction: column-reverse;
+    }   
+}
+    .hero-section .headshot img {
+        width: 300px;
+    }
+
+
+    /* SECTION 4: Contact */
+    .contact-section .group {
+        flex-direction: column;
+    }
+
+
+@media (max-width: 600px) {
+    /*NAVBAR */
+
+    nav {
+        padding: 0 20px;
+    }
+
+    nav .right a {
+        font-size: 22px;
+    }
+
+
+
+    nav .right a:last-child{
+        color: var(--text-color);
+        background-color: transparent;
+        padding: 0px;
+        transition: 0.2s linear;
+    }
+
+    nav .right a span {
+        display: none;
+
+    }
+
+    /* SECTION 1 : Hero */
+    .hero-section {
+        padding: 0 20px;
+    }
+
+    .hero-section.text h2 {
+        font-size: 30px;
+    }
+
+    /* SECTION 2: Skills */
+    .skills-section {
+        padding: 0 20px;
+    }
+
+    .skills-section .cells .cell span{
+        font-size: 16px;
+    }
+
+
+
+    /* SECTION 4: Contact */
+    .contact-section .group {
+        padding: 0 20px;
+    }
+    
+}
+
+
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #000;
+    width: 44px;
+    height: 44px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.swiper-button-prev {
+    left: 20px;
+}
+
+.swiper-button-next {
+    right: 20px;
+}
+
+.swiper {
+    position: relative;
+    overflow: hidden;
+   
+}
+    
+
+.swiper-pagination {
+    bottom: -25px !important;
+}
+
+.swiper-pagination-bullet {
+    background: #000;
+    opacity: 0.4;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+.container.swiper {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 0;   
+}
+
+.swiper {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  width: 32px;
+  height: 32px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 6px 15px rgba(0,0,0,.25);
+  color: #000;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.swiper-button-prev { 
+    left: -10px;
+}
+
+
+
+.swiper-button-next { 
+    right: -10px;
+}
+
+
+.swiper-pagination {
+ display: none;
+}
+
+
