@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Aditya Choudhary — Explorer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Exo+2:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Exo+2:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300&family=Pinyon+Script&display=swap" rel="stylesheet"/>
 <style>
 /* ══════════════════════════════════════
    ROOT & RESET
@@ -15,7 +15,7 @@
   --deep: #12000a;
   --cosmos: #1a0010;
   --nebula-blue: #0d1b4b;
-  --star-white: #fff0e8;
+  --star-white: #fff8f2;
   --dim-star: #cc9a7a;
   --planet-glow: rgba(255,140,60,0.15);
   --gold: #f0c060;
@@ -70,6 +70,7 @@ body:has(button:hover) #cursor{
    NAV — HUD style
 ══════════════════════════════════════ */
 nav{
+  padding:1.5rem 2.5rem; /* slightly more breathing room */
   position:fixed;top:0;left:0;right:0;z-index:1000;
   padding:1.2rem 2.5rem;
   display:flex;align-items:center;justify-content:space-between;
@@ -96,7 +97,7 @@ nav{
   transform:scaleX(0);transform-origin:left;
   transition:transform 0.25s;
 }
-.nav-links a:hover{color:#fff0e8;text-shadow:0 0 12px rgba(255,200,150,0.5);}
+.nav-links a:hover{color:#fff0e8;text-shadow:0 0 12px rgba(255,220,185,0.65);}
 .nav-links a:hover::after{transform:scaleX(1);}
 
 /* ══════════════════════════════════════
@@ -104,84 +105,308 @@ nav{
 ══════════════════════════════════════ */
 section{
   position:relative;z-index:10;
-  min-height:100vh;
+  min-height:auto;
   display:flex;align-items:center;justify-content:center;
-  padding:6rem 2rem;
+  padding:4rem 2rem;
 }
 
 /* ══════════════════════════════════════
-   HERO
+   HERO — SPLIT LAYOUT
 ══════════════════════════════════════ */
-#hero{flex-direction:column;text-align:center;padding-top:0;}
+#hero{
+  flex-direction:row;
+  text-align:left;
+  padding-top:6.5rem;
+  padding-bottom:3rem;
+  padding-left:5vw;
+  padding-right:5vw;
+  gap:0;
+  align-items:center;
+  justify-content:center;
+}
+
+.hero-split{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+  align-items:center;
+  max-width:1200px;
+  width:100%;
+}
+
+/* ── LEFT: Photo side ── */
+.hero-photo-side{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  animation:fadeUp 1s 0.3s forwards;
+}
+
+.hero-photo-frame{
+  position:relative;
+  width:clamp(260px,28vw,420px);
+  aspect-ratio:3/4;
+}
+
+/* Decorative corner brackets */
+.hero-photo-frame::before,
+.hero-photo-frame::after{
+  content:'';
+  position:absolute;
+  width:30px;height:30px;
+  border-color:#ff9a5a;border-style:solid;
+  z-index:2;
+}
+.hero-photo-frame::before{top:-4px;left:-4px;border-width:2px 0 0 2px;}
+.hero-photo-frame::after{bottom:-4px;right:-4px;border-width:0 2px 2px 0;}
+
+.hero-photo-frame .corner-tr,
+.hero-photo-frame .corner-bl{
+  position:absolute;
+  width:30px;height:30px;
+  border-color:#ff9a5a;border-style:solid;
+  z-index:2;
+}
+.hero-photo-frame .corner-tr{top:-4px;right:-4px;border-width:2px 2px 0 0;}
+.hero-photo-frame .corner-bl{bottom:-4px;left:-4px;border-width:0 0 2px 2px;}
+
+/* Glowing side accent */
+.hero-photo-frame .side-glow{
+  position:absolute;
+  left:-10px;top:10%;bottom:10%;
+  width:3px;
+  background:linear-gradient(to bottom,transparent,#ff7c3a,transparent);
+  box-shadow:0 0 12px #ff7c3a;
+}
+
+.hero-photo-inner{
+  width:100%;
+  height:100%;
+  border:1px solid rgba(255,180,100,0.2);
+  background:rgba(40,10,0,0.4);
+  backdrop-filter:blur(4px);
+  overflow:hidden;
+  position:relative;
+}
+
+/* Photo placeholder — replace src with your actual photo */
+.hero-photo-inner img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:top center;
+  display:block;
+  opacity:0.9;
+}
+
+/* Placeholder when no photo */
+.hero-photo-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:1rem;
+  color:rgba(255,180,100,0.3);
+}
+.hero-photo-placeholder svg{ opacity:0.25; }
+.hero-photo-placeholder span{
+  font-family:var(--font-display);
+  font-size:0.55rem;letter-spacing:0.2em;
+  color:rgba(255,180,100,0.25);
+}
+
+/* Scanline overlay */
+.hero-photo-inner::after{
+  content:'';
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.06) 3px,
+    rgba(0,0,0,0.06) 4px
+  );
+  pointer-events:none;
+}
+
+/* HUD tag on photo */
+.photo-tag{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  padding:0.75rem 1rem;
+  background:linear-gradient(to top,rgba(10,0,5,0.85),transparent);
+  font-family:var(--font-display);font-size:0.52rem;
+  letter-spacing:0.18em;color:#ff9a5a;
+  display:flex;justify-content:space-between;align-items:flex-end;
+}
+.photo-tag-status{
+  display:flex;align-items:center;gap:0.4rem;
+  font-size:0.48rem;color:#cc8855;
+}
+.photo-tag-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:#ff9a5a;
+  box-shadow:0 0 6px #ff9a5a;
+  animation:pulse 2s infinite;
+}
+
+/* ── RIGHT: Text side ── */
+.hero-text-side{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap: 0.5rem;
+}
 
 .hero-eyebrow{
-  font-family:var(--font-display);font-size:0.65rem;
-  letter-spacing:0.35em;color:#ff9a5a;
+  margin-top:1.5rem;
+  font-family:var(--font-display);font-size:0.62rem;
+  letter-spacing:0.3em;color:#ff9a5a;
   margin-bottom:1.5rem;
-  opacity:0;animation:fadeUp 1s 0.3s forwards;
+  opacity:0;animation:fadeUp 1s 0.4s forwards;
+  display:flex;align-items:center;gap:0.6rem;
 }
+.hero-eyebrow::before{
+  content:'';display:inline-block;
+  width:24px;height:1px;background:#ff9a5a;
+}
+
 .hero-name{
-  font-family:var(--font-display);
-  font-size:clamp(2.8rem,9vw,8rem);
-  font-weight:900;line-height:0.9;
-  letter-spacing:-0.02em;
+  font-family:var(--font-display); /* Orbitron */
+  font-size:clamp(3.5rem,7vw,6.5rem);
+  font-weight:800;
+  line-height:1.0;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
   background:linear-gradient(135deg,#ffffff 0%,#ffcc88 40%,#ff6030 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-bottom:0.5rem;
-  opacity:0;animation:fadeUp 1s 0.5s forwards;
+  margin-bottom:0.6rem;
+  opacity:0;animation:fadeUp 1s 0.55s forwards;
+  text-shadow:none;
+  filter:drop-shadow(0 0 30px rgba(255,150,80,0.35));
 }
+
 .hero-title{
-  font-family:var(--font-display);font-size:clamp(0.7rem,2vw,1rem);
+  font-family:var(--font-display);font-size:clamp(0.6rem,1.5vw,0.85rem);
   font-weight:400;letter-spacing:0.4em;
-  color:#cc8855;margin-bottom:2rem;
+  color:#cc8855;margin-bottom:1.8rem;
   opacity:0;animation:fadeUp 1s 0.7s forwards;
 }
+
+.hero-divider{
+  width:60px;height:1px;
+  background:linear-gradient(to right,#ff7c3a,transparent);
+  margin-bottom:1.6rem;
+  opacity:0;animation:fadeUp 1s 0.8s forwards;
+}
+
 .hero-bio{
-  font-size:1.05rem;font-weight:200;line-height:1.9;
-  color:rgba(255,220,180,0.75);max-width:560px;
-  margin:0 auto 3rem;
+  font-size:0.95rem;font-weight:200;line-height:1.9;
+  color:rgba(255,232,210,0.88);
   opacity:0;animation:fadeUp 1s 0.9s forwards;
 }
 .hero-bio strong{color:#fff0e8;font-weight:600;}
 
 .hero-ctas{
-  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  display:flex;gap:1rem;justify-content:flex-start;flex-wrap:wrap;
   opacity:0;animation:fadeUp 1s 1.1s forwards;
 }
 
+/* Responsive hero split */
+@media(max-width:900px){
+  #hero{
+    padding-top:6rem;
+    padding-bottom:4rem;
+    padding-left:1.5rem;
+    padding-right:1.5rem;
+  }
+  .hero-split{
+    grid-template-columns:1fr;
+    text-align:center;
+    gap:2rem;
+  }
+  .hero-photo-side{ order:-1; }
+  .hero-photo-frame{
+    width:clamp(160px,45vw,220px);
+    aspect-ratio:3/4;
+  }
+  .hero-text-side{ align-items:center; }
+  .hero-eyebrow{ justify-content:center; }
+  .hero-divider{ margin-left:auto;margin-right:auto; }
+  .hero-ctas{
+    justify-content:center;
+    flex-direction:column;
+    align-items:center;
+    gap:0.75rem;
+    width:100%;
+  }
+  .btn-launch,
+  .btn-signal{
+    width:100%;
+    max-width:280px;
+    text-align:center;
+    clip-path:none !important;
+    border-radius:2px;
+  }
+  .hero-name{
+    font-size:clamp(2.8rem,13vw,4.5rem);
+  }
+  .hero-bio{
+    font-size:0.9rem;
+  }
+}
+
 .btn-launch{
-  font-family:var(--font-display);font-size:0.65rem;
-  letter-spacing:0.15em;padding:0.9rem 2rem;
-  background:transparent;border:1px solid #ff7c3a;
-  color:#ff7c3a;text-decoration:none;
-  position:relative;overflow:hidden;
-  transition:color 0.3s;
-  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
+  font-family:var(--font-display);
+  font-size:0.7rem;
+  letter-spacing:0.2em;
+  padding:1rem 2.4rem;
+
+  background:linear-gradient(135deg,#ff7c3a,#ff3c00);
+  border:2px solid #ff7c3a;
+  color:#fff;
+
+  text-shadow:0 0 10px rgba(255,255,255,0.5);
+  box-shadow:0 0 25px rgba(255,100,20,0.5);
+
+  text-decoration:none;
+  transition:all 0.3s ease;
 }
-.btn-launch::before{
-  content:'';position:absolute;inset:0;
-  background:#ff7c3a;
-  transform:translateX(-100%);transition:transform 0.3s;
-  z-index:-1;
+.btn-launch:hover{
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 0 40px rgba(255,100,20,0.8);
 }
-.btn-launch:hover{color:#0a0005;}
-.btn-launch:hover::before{transform:translateX(0);}
 
 .btn-signal{
-  font-family:var(--font-display);font-size:0.65rem;
-  letter-spacing:0.15em;padding:0.9rem 2rem;
-  background:transparent;border:1px solid rgba(255,200,150,0.25);
-  color:#cc8855;text-decoration:none;
-  transition:border-color 0.3s,color 0.3s;
-  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
+  font-family:var(--font-display);
+  font-size:0.7rem;
+  letter-spacing:0.2em;
+  padding:1rem 2.4rem;
+
+  background:transparent;
+  border:2px solid #ff7c3a;
+  color:#ff9a5a;
+
+  box-shadow:0 0 15px rgba(255,124,58,0.4);
+  text-decoration:none;
+  transition:all 0.3s ease;
 }
-.btn-signal:hover{border-color:var(--gold);color:var(--gold);}
+.btn-signal:hover{
+  background:#ff7c3a;
+  color:#000;
+  box-shadow:0 0 30px rgba(255,124,58,0.8);
+}
 
 .scroll-hint{
-  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:0.5rem;
   font-family:var(--font-display);font-size:0.55rem;letter-spacing:0.2em;
   color:#cc8855;opacity:0;animation:fadeUp 1s 1.5s forwards;
+  pointer-events:none;
+  white-space:nowrap;
+}
+@media(max-width:900px){
+  .scroll-hint{ display:none; }
 }
 .scroll-line{
   width:1px;height:50px;
@@ -242,7 +467,7 @@ section{
 }
 .about-text p{
   font-size:1rem;font-weight:300;line-height:1.9;
-  color:rgba(255,220,180,0.8);margin-bottom:1rem;
+  color:rgba(255,232,210,0.90);margin-bottom:1rem;
 }
 .about-text p strong{color:#fff0e8;font-weight:600;}
 
@@ -388,7 +613,7 @@ section{
 }
 .dossier-desc{
   font-size:0.85rem;font-weight:300;line-height:1.8;
-  color:rgba(255,210,170,0.7);margin-bottom:1.25rem;
+  color:rgba(255,228,205,0.85);margin-bottom:1.25rem;
 }
 .dossier-links{display:flex;gap:0.75rem;}
 .dossier-link{
@@ -412,13 +637,13 @@ section{
 
 .contact-lore p{
   font-size:0.9rem;font-weight:300;line-height:1.9;
-  color:rgba(255,210,170,0.7);margin-bottom:1rem;
+  color:rgba(255,228,205,0.85);margin-bottom:1rem;
 }
 .contact-coords{margin-top:1.5rem;display:flex;flex-direction:column;gap:0.75rem;}
 .coord-item{
   display:flex;align-items:center;gap:1rem;
   font-size:0.82rem;font-weight:300;
-  color:rgba(255,210,170,0.7);
+  color:rgba(255,228,205,0.85);
   text-decoration:none;transition:color 0.2s;
 }
 .coord-item:hover{color:#fff0e8;}
@@ -523,6 +748,7 @@ footer{
 </style>
 </head>
 <body>
+<div class="bg-overlay"></div>
 
 <!-- Custom cursor -->
 <div id="cursor"></div>
@@ -533,29 +759,60 @@ footer{
 
 <!-- NAV -->
 <nav>
-  <a href="#hero" class="nav-logo">AC // EXPLORER</a>
+  <a href="#hero" class="nav-logo">ADITYA CHOUDHARY / EXPLORER</a>
   <ul class="nav-links">
-    <li><a href="#about">MISSION LOG</a></li>
-    <li><a href="#skills">SYSTEMS</a></li>
-    <li><a href="#projects">EXPEDITIONS</a></li>
-    <li><a href="#contact">TRANSMIT</a></li>
+    <li><a href="#about">ABOUT</a></li>
+    <li><a href="#skills">SKILLS</a></li>
+    <li><a href="#projects">PROJECTS</a></li>
+    <li><a href="#contact">CONTACT</a></li>
   </ul>
 </nav>
 
 <!-- ══ HERO ══ -->
 <section id="hero">
-  <p class="hero-eyebrow">UPES DEHRADUN · SEM II · STILL FIGURING IT OUT</p>
-  <h1 class="hero-name">ADITYA<br>CHOUDHARY</h1>
-  <p class="hero-title">CS STUDENT</p>
-  <p class="hero-bio">
-    I got into CS because <strong>everyone said it pays well.</strong> Turns out it also involves
-    pointer errors at 2am. Still deciding if I like it — but I haven't quit yet,
-    and I did build a password manager just because it seemed cool.
-  </p>
-  <div class="hero-ctas">
-    <a href="#projects" class="btn-launch">SEE WHAT I'VE BUILT</a>
-    <a href="#contact" class="btn-signal">SAY HELLO</a>
+  <div class="hero-split">
+
+    <!-- LEFT: Photo -->
+    <div class="hero-photo-side">
+      <div class="hero-photo-frame">
+        <span class="corner-tr"></span>
+        <span class="corner-bl"></span>
+        <div class="side-glow"></div>
+        <div class="hero-photo-inner">
+          <!-- Replace the placeholder below with your actual photo:
+               <img src="your-photo.jpg" alt="Aditya Choudhary" />
+               Remove the .hero-photo-placeholder div when you add the img tag -->
+          <img src="IMG_20260428_022705.jpg" alt="Aditya Choudhary">
+          <div class="photo-tag">
+            <span>ADITYA CHOUDHARY.</span>
+            <span class="photo-tag-status">
+              <span class="photo-tag-dot"></span>
+              ONLINE
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Text -->
+    <div class="hero-text-side">
+      <p class="hero-eyebrow">UPES DEHRADUN · SEM II · STILL FIGURING IT OUT</p>
+      <h1 class="hero-name">Aditya Choudhary</h1>
+      <p class="hero-title">CS STUDENT &amp; BUILDER</p>
+      <div class="hero-divider"></div>
+      <p class="hero-bio">
+        I got into CS because <strong>everyone said it pays well.</strong> Turns out it also involves
+        pointer errors at 2am. Still deciding if I like it — but I haven't quit yet,
+        and I did build a password manager just because it seemed cool.
+      </p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-launch">SEE WHAT I'VE BUILT</a>
+        <a href="#contact" class="btn-signal">SAY HELLO</a>
+      </div>
+    </div>
+
   </div>
+
   <div class="scroll-hint">
     <span>SCROLL TO EXPLORE</span>
     <div class="scroll-line"></div>
@@ -570,8 +827,8 @@ footer{
     <div class="about-text reveal">
       <div class="hud-label">MISSION LOG</div>
       <h2 class="section-heading">About<br>the Explorer</h2>
-      <p>I'm <strong>Aditya Choudhary</strong>. Second semester CS at UPES, Dehradun. Honest answer for why I chose CS? Everyone said it pays well. That's it.</p>
-      <p>What I didn't expect: I'd actually find some of it interesting. C broke my brain first — pointer errors especially. The day it <strong>finally worked on the first try</strong>, no errors, nothing — that felt genuinely good. Chasing that feeling into C++, Python, and front-end now.</p>
+      <p>I'm <strong>Aditya Choudhary</strong>. Second semester CS at UPES, Dehradun. </p>
+      <p>What I didn't expect: I'd actually find some of Coding interesting. C broke my brain first — errors especially. The day it <strong>finally worked on the first try</strong>, no errors, nothing — that felt genuinely good. Chasing that feeling into C++, Python, and front-end now.</p>
       <p>Outside a screen: cricket and a lot of music. Just a laptop, nothing fancy. That's the whole setup.</p>
     </div>
     <div class="mission-card reveal" style="transition-delay:0.2s">
@@ -582,7 +839,7 @@ footer{
       </div>
       <div class="mission-stat">
         <span class="mission-stat-key">Coding since</span>
-        <span class="mission-stat-val">2024</span>
+        <span class="mission-stat-val">2025</span>
       </div>
       <div class="mission-stat">
         <span class="mission-stat-key">Strongest skill</span>
@@ -609,8 +866,8 @@ footer{
   <div class="planet-orb" style="width:400px;height:400px;left:-150px;top:50%;transform:translateY(-50%);background:radial-gradient(circle at 40% 30%,#601030,#1a0a00 65%,transparent 100%);opacity:0.45;animation:float 12s ease-in-out infinite 2s;"></div>
 
   <div class="inner reveal">
-    <div class="hud-label">WHAT I KNOW (HONESTLY)</div>
-    <h2 class="section-heading">Skills —<br>No Exaggeration</h2>
+    <div class="hud-label">WHAT I KNOW </div>
+    <h2 class="section-heading">Skills ~<br></h2>
     <div class="skills-grid">
 
       <div class="skill-orb" style="--skill-color:#ff7c3a">
@@ -665,7 +922,7 @@ footer{
 
   <div class="inner">
     <div class="hud-label reveal">THINGS I'VE BUILT</div>
-    <h2 class="section-heading reveal">Projects —<br>3 So Far</h2>
+    <h2 class="section-heading reveal">Projects ~<br></h2>
     <div class="projects-grid">
 
       <!-- KEYCHEEKY -->
@@ -718,11 +975,31 @@ footer{
           <h3 class="dossier-title">YOUTUBE CLONE</h3>
           <p class="dossier-desc">Recreated YouTube's home page in pure HTML and CSS. Sounds simple. It wasn't. Getting the layout to actually match pixel-by-pixel took way longer than I expected.</p>
           <div class="dossier-links">
-            <a href="#" class="dossier-link">GITHUB →</a>
-            <a href="#" class="dossier-link">LIVE →</a>
+            <a href="https://github.com/Aditya-Choudhary-gh" class="dossier-link" target="_blank">GITHUB →</a>
           </div>
         </div>
       </div>
+
+      <!-- STUDENT BURNOUT PREDICTION SYSTEM -->
+<div class="mission-dossier reveal" style="transition-delay:0.45s">
+  <div class="dossier-header">
+    <div class="dossier-planet" style="background:radial-gradient(circle at 35% 30%,#4ade80,#064e3b 60%,#021a12);box-shadow:0 0 20px rgba(74,222,128,0.3);"></div>
+    <div class="dossier-meta">
+      <div class="dossier-tag">ML / PYTHON</div>
+      <span class="dossier-status status-active">ACTIVE</span>
+    </div>
+  </div>
+  <div class="dossier-body">
+    <h3 class="dossier-title">STUDENT BURNOUT PREDICTION SYSTEM</h3>
+    <p class="dossier-desc">
+      Built a machine learning model to predict student burnout levels based on lifestyle, academic pressure, and habits. Integrated SHAP explainability to understand which factors influence predictions the most.
+    </p>
+    <div class="dossier-links">
+      <a href="https://github.com/Aditya-Choudhary-gh/Burnout-Predictor_app" class="dossier-link" target="_blank">GITHUB →</a>
+      
+    </div>
+  </div>
+</div>
 
     </div>
   </div>
@@ -737,7 +1014,7 @@ footer{
       <div class="hud-label">HIT ME UP</div>
       <h2 class="section-heading">Let's<br>Talk</h2>
       <p>I'm a second-year CS student, not a senior dev — but I'm genuinely trying to get better and I'm open to internships, collabs, or just someone pointing me in a useful direction.</p>
-      <p style="margin-top:0.75rem;font-size:0.85rem;font-weight:300;color:rgba(255,200,150,0.5);">I check my email. I will actually reply.</p>
+      <p style="margin-top:0.75rem;font-size:0.85rem;font-weight:300;color:rgba(255,220,185,0.65);">I check my email. I will actually reply.</p>
       <div class="contact-coords">
         <a href="https://github.com/Aditya-Choudhary-gh" class="coord-item" target="_blank">
           <span class="coord-icon">
