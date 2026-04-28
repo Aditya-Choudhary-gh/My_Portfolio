@@ -6,6 +6,14 @@
 <title>Aditya Choudhary — Explorer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Exo+2:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300&family=Pinyon+Script&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // ── EmailJS init ──
+  // Replace YOUR_PUBLIC_KEY with your key from emailjs.com → Account → API Keys
+  emailjs.init("DqwBGxBRFew2qjcos");
+</script>
 <style>
 /* ══════════════════════════════════════
    ROOT & RESET
@@ -272,19 +280,21 @@ section{
 }
 
 .hero-name{
-  font-family:var(--font-display); /* Orbitron */
+  font-family: 'League Spartan', sans-serif;
   font-size:clamp(3.5rem,7vw,6.5rem);
-  font-weight:800;
+  font-weight:700;
   line-height:1.0;
-  letter-spacing:0.08em;
+  letter-spacing:0.02em;
   text-transform:uppercase;
   background:linear-gradient(135deg,#ffffff 0%,#ffcc88 40%,#ff6030 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   margin-bottom:0.6rem;
   opacity:0;animation:fadeUp 1s 0.55s forwards;
   text-shadow:none;
-  filter:drop-shadow(0 0 30px rgba(255,150,80,0.35));
+  filter:drop-shadow(0 0 30px rgba(255,150,60,0.25));
 }
+
+
 
 .hero-title{
   font-family:var(--font-display);font-size:clamp(0.6rem,1.5vw,0.85rem);
@@ -1041,15 +1051,15 @@ footer{
       <form class="transmission-form" onsubmit="handleTransmit(event)">
         <div class="form-field">
           <label>SENDER DESIGNATION</label>
-          <input type="text" placeholder="Your name" required/>
+          <input type="text" name="name" placeholder="Your name" required/>
         </div>
         <div class="form-field">
           <label>RETURN FREQUENCY</label>
-          <input type="email" placeholder="your@email.com" required/>
+          <input type="email" name="email" placeholder="your@email.com" required/>
         </div>
         <div class="form-field">
           <label>MESSAGE PAYLOAD</label>
-          <textarea placeholder="What are you transmitting?" required></textarea>
+          <textarea name="message" placeholder="What are you transmitting?" required></textarea>
         </div>
         <button type="submit" class="btn-launch" id="transmitBtn" style="align-self:flex-start;border:none;font-family:'Orbitron',sans-serif;font-size:0.65rem;letter-spacing:0.15em;cursor:none;">TRANSMIT MESSAGE</button>
       </form>
@@ -1299,19 +1309,38 @@ const skillSec=document.getElementById('skills');
 if(skillSec) barObs.observe(skillSec);
 
 /* ══ FORM ══ */
-function handleTransmit(e){
+function handleTransmit(e) {
   e.preventDefault();
-  const btn=document.getElementById('transmitBtn');
-  btn.textContent='SIGNAL RECEIVED ✓';
-  btn.style.background='#ff7c3a';
-  btn.style.color='#0a0005';
-  btn.style.borderColor='#ff7c3a';
-  btn.disabled=true;
-  setTimeout(()=>{
-    btn.textContent='TRANSMIT MESSAGE';
-    btn.style.background='';btn.style.color='';btn.style.borderColor='';
-    btn.disabled=false;e.target.reset();
-  },3500);
+  const btn = document.getElementById('transmitBtn');
+  btn.textContent = 'TRANSMITTING...';
+  btn.disabled = true;
+
+  // Replace YOUR_SERVICE_ID and YOUR_TEMPLATE_ID with your values from emailjs.com
+  emailjs.sendForm('service_rxyl3o8', '5ivcdav', e.target)
+    .then(() => {
+      btn.textContent = 'SIGNAL RECEIVED ✓';
+      btn.style.background = '#ff7c3a';
+      btn.style.color = '#0a0005';
+      btn.style.borderColor = '#ff7c3a';
+      setTimeout(() => {
+        btn.textContent = 'TRANSMIT MESSAGE';
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.style.borderColor = '';
+        btn.disabled = false;
+        e.target.reset();
+      }, 3500);
+    })
+    .catch((err) => {
+      console.error('EmailJS error:', err);
+      btn.textContent = 'TRANSMISSION FAILED ✗';
+      btn.style.borderColor = '#ff4040';
+      btn.disabled = false;
+      setTimeout(() => {
+        btn.textContent = 'TRANSMIT MESSAGE';
+        btn.style.borderColor = '';
+      }, 3000);
+    });
 }
 </script>
 </body>
