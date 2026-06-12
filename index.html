@@ -69,7 +69,82 @@
     .blob-1 { width: 600px; height: 600px; background: rgba(139,111,232,0.035); top: -200px; left: -200px; }
     .blob-2 { width: 500px; height: 500px; background: rgba(62,255,163,0.04); bottom: 10%; right: -150px; }
     .blob-3 { width: 400px; height: 400px; background: rgba(139,111,232,0.04); top: 50%; left: 40%; }
+/* ── FAANG LOADER ───────────────────────── */
 
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    opacity 0.9s ease,
+    visibility 0.9s ease;
+}
+
+#loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-content {
+  width: min(500px, 90vw);
+}
+
+.loader-logo {
+  font-family: var(--mono);
+  font-size: 16px;
+  color: var(--blue);
+  margin-bottom: 28px;
+  letter-spacing: 0.08em;
+}
+
+.loader-logo span {
+  color: var(--text-secondary);
+}
+
+.loader-terminal {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px;
+}
+
+.loader-line {
+  opacity: 0;
+  transform: translateY(10px);
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--text-secondary);
+
+  animation:
+    loaderFade 0.5s ease forwards;
+}
+
+.loader-prompt {
+  color: var(--green);
+  margin-right: 8px;
+}
+
+.delay-1 { animation-delay: 0.6s; }
+.delay-2 { animation-delay: 1.2s; }
+.delay-3 { animation-delay: 1.8s; }
+
+.ready {
+  color: var(--green);
+  margin-top: 14px;
+}
+
+@keyframes loaderFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
     /* ── NAV ───────────────────────────────────────── */
     nav {
       position: fixed; top: 0; left: 0; right: 0;
@@ -956,6 +1031,37 @@
   </style>
 </head>
 <body>
+  <!-- FAANG Loader -->
+<div id="loader">
+  <div class="loader-content">
+
+    <div class="loader-logo">
+      aditya<span>.dev</span>
+    </div>
+
+    <div class="loader-terminal">
+      <div class="loader-line">
+        <span class="loader-prompt">$</span>
+        Initializing portfolio...
+      </div>
+
+      <div class="loader-line delay-1">
+        <span class="loader-prompt">$</span>
+        Loading projects...
+      </div>
+
+      <div class="loader-line delay-2">
+        <span class="loader-prompt">$</span>
+        Compiling experience...
+      </div>
+
+      <div class="loader-line delay-3 ready">
+        Ready.
+      </div>
+    </div>
+
+  </div>
+</div>
 
 
   <div class="cursor-dot" id="cursorDot"></div>
@@ -1524,6 +1630,15 @@ if (roadmap) {
         e.target.reset();
       }, 3000);
     }
+
+    // ── FAANG LOADER ──────────────────────────
+window.addEventListener('load', () => {
+  const loader = document.getElementById('loader');
+
+  setTimeout(() => {
+    loader.classList.add('hidden');
+  }, 2800);
+});
 
     // ── ACTIVE NAV HIGHLIGHT ──────────────────────────
     const sections = document.querySelectorAll('section[id]');
