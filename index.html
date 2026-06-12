@@ -1777,17 +1777,18 @@ window.addEventListener('load', () => {
       { threshold: 0.4 }
     );
     sections.forEach(s => navObserver.observe(s));
-  </script>
-  window.addEventListener('load', () => {
+ <script>
+window.addEventListener('load', () => {
   const loader = document.getElementById('loader');
 
-  requestAnimationFrame(() => {
+  setTimeout(() => {
     loader.classList.add('animate');
-  });
+  }, 80);
 
   setTimeout(() => {
     loader.classList.add('hidden');
-  }, 3200);
+  }, 3900);
 });
+</script>
 </body>
 </html>
