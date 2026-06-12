@@ -160,19 +160,16 @@
 
 .loader-progress {
   width: 100%;
-  height: 3px;
+  height: 6px;          /* bumped from 3px — gives glow more surface */
   margin-top: 24px;
-
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.06);
   border-radius: 999px;
   position: relative;
 }
 
 .loader-progress-bar {
-  position: relative;
   width: 100%;
   height: 100%;
-
   background: linear-gradient(
     90deg,
     #22c55e 0%,
@@ -180,64 +177,57 @@
     #c4b5fd 70%,
     #8b5cf6 100%
   );
-
   border-radius: 999px;
-
   transform: scaleX(0);
   transform-origin: left center;
-
   will-change: transform;
-
-  /* stronger visible glow */
-  box-shadow:
-  0 0 6px  rgba(34,197,94,0.9),
-  0 0 14px rgba(62,255,163,0.7),
-  0 0 28px rgba(139,92,246,0.6),
-  0 0 50px rgba(139,92,246,0.3);
+  position: relative;
 }
 
-/* glowing sweep effect */
+/* glow on the TRACK pseudo — always full-width */
+.loader-progress::after {
+  content: '';
+  position: absolute;
+  inset: -8px 0;        /* 8px breathing room above/below for glow bloom */
+  border-radius: 999px;
+  opacity: 0;
+  box-shadow:
+    0 0 10px 5px  rgba(34,197,94,0.9),
+    0 0 22px 8px  rgba(62,255,163,0.65),
+    0 0 45px 12px rgba(139,92,246,0.5);
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+#loader.animate .loader-progress::after {
+  opacity: 1;
+}
+
+#loader.animate .loader-progress-bar {
+  transform: scaleX(1);
+  transition: transform 3.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* shimmer sweep */
 .loader-progress-bar::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: -30%;
-  width: 30%;
-  height: 100%;
-
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,0.55),
-    transparent
-  );
-
-  filter: blur(4px);
+  top: 0; left: -30%;
+  width: 30%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  filter: blur(3px);
 }
 
-    @keyframes shimmer {
-  from {
-    transform: translateX(-120%);
-  }
-
-  to {
-    transform: translateX(120%);
-  }
-}
-
-/* animate fill */
-#loader.animate .loader-progress-bar {
-  transform: scaleX(1);
-
-  transition:
-    transform 3.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* animate shimmer */
 #loader.animate .loader-progress-bar::after {
-  animation:
-    progressShine 1.1s linear infinite;
+  animation: progressShine 1.1s linear infinite;
 }
+
+@keyframes progressShine {
+  from { left: -30%; }
+  to   { left: 130%; }
+}
+/* animate shimmer */
+
 
 /* line fade in */
 @keyframes loaderFade {
@@ -251,15 +241,7 @@
 
 
 /* moving glow */
-@keyframes progressShine {
-  from {
-    left: -30%;
-  }
 
-  to {
-    left: 130%;
-  }
-}
     /* ── NAV ───────────────────────────────────────── */
     nav {
       position: fixed; top: 0; left: 0; right: 0;
