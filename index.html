@@ -381,13 +381,35 @@
       line-height: 1.8;
     }
 
-    .typing-terminal {
+   .typing-terminal {
   margin: 0;
   white-space: pre-wrap;
   font-family: var(--mono);
-  font-size: 13px;
-  line-height: 1.8;
-  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 2;
+  color: #d4d4d4;
+}
+
+/* $ prompt */
+.prompt {
+  color: #7ee787;
+  font-weight: 700;
+}
+
+/* terminal commands */
+.command {
+  color: #c084fc;
+}
+
+/* labels */
+.label {
+  color: #34d399;
+  font-weight: 600;
+}
+
+/* final output */
+.success {
+  color: #a3e635;
 }
 
 .typing-terminal::after {
@@ -1654,7 +1676,24 @@ let terminalIndex = 0;
 
 function typeTerminal() {
   if (terminalIndex < terminalText.length) {
-    terminal.textContent += terminalText.charAt(terminalIndex);
+
+    const currentText =
+      terminalText.slice(0, terminalIndex);
+
+    terminal.innerHTML = currentText
+      .replace(
+        /^\$ (.*)$/gm,
+        '<span class="prompt">$</span> <span class="command">$1</span>'
+      )
+      .replace(
+        /^(name|status|focus|languages|location)/gm,
+        '<span class="label">$1</span>'
+      )
+      .replace(
+        /^ready to build$/gm,
+        '<span class="success">ready to build</span>'
+      );
+
     terminalIndex++;
 
     setTimeout(typeTerminal, 14);
