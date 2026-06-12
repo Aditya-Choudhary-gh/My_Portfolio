@@ -292,6 +292,58 @@
     }
     .nav-cta:hover { background: var(--blue); color: #080D1A; }
 
+    /* ── MOBILE MENU ───────────────────────── */
+
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 120;
+}
+
+@media (max-width: 900px) {
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 72px;
+    left: 20px;
+    right: 20px;
+
+    background: rgba(16,14,28,0.95);
+    backdrop-filter: blur(20px);
+
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    flex-direction: column;
+    gap: 18px;
+
+    padding: 24px;
+
+    opacity: 0;
+    transform: translateY(-12px);
+    pointer-events: none;
+
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .nav-links.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    display: flex;
+  }
+}
+
     /* ── LAYOUT ────────────────────────────────────── */
     section {
       position: relative;
@@ -1062,7 +1114,6 @@
    /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   nav { padding: 16px 24px; }
-  .nav-links { display: none; }
   section { padding: 60px 20px; }
   .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .projects-grid { grid-template-columns: 1fr; }
@@ -1195,6 +1246,9 @@
   <!-- ── NAV ── -->
   <nav>
     <div class="nav-logo">aditya<span>.dev</span></div>
+    <button class="menu-toggle" id="menuToggle">
+  ☰
+</button>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -1705,6 +1759,22 @@ function typeTerminal() {
     setTimeout(typeTerminal, 14);
   }
 }
+
+// ── MOBILE MENU ─────────────────────────
+
+const menuToggle =
+  document.getElementById('menuToggle');
+
+const navLinks =
+  document.querySelector('.nav-links');
+
+menuToggle?.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+
+
+
+    
     // ── CUSTOM CURSOR ──
 // ── CUSTOM CURSOR ──
 const dot = document.getElementById('cursorDot');
