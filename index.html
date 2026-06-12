@@ -171,7 +171,7 @@
 
 .loader-progress-bar {
   position: relative;
-  width: 0%;
+  width: 100%;
   height: 100%;
 
   background: linear-gradient(
@@ -181,11 +181,21 @@
     #a78bfa 100%
   );
 
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+
   box-shadow:
     0 0 18px rgba(34,197,94,0.45),
     0 0 42px rgba(167,139,250,0.24);
 
   overflow: hidden;
+
+  /* IMPORTANT */
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+  transition: none;
 }
 
 /* glowing sweep effect */
@@ -209,10 +219,10 @@
 
 /* animate fill */
 #loader.animate .loader-progress-bar {
-  animation:
-    loadingBar 2.8s
-    cubic-bezier(0.22, 1, 0.36, 1)
-    forwards;
+  transform: scaleX(1);
+
+  transition:
+    transform 3.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* animate shimmer */
@@ -230,15 +240,7 @@
 }
 
 /* bar filling */
-@keyframes loadingBar {
-  from {
-    width: 0%;
-  }
 
-  to {
-    width: 100%;
-  }
-}
 
 /* moving glow */
 @keyframes progressShine {
@@ -1742,21 +1744,28 @@ if (roadmap) {
       }, 3000);
     }
 
- // ── FAANG LOADER ──────────────────────────
+// ── FAANG LOADER ──────────────────────────
 window.addEventListener('load', () => {
   const loader = document.getElementById('loader');
+  const bar = document.querySelector('.loader-progress-bar');
 
-  if (!loader) return;
+  if (!loader || !bar) return;
 
-  // wait a tiny bit so bar starts from 0
+  // force initial 0% state
+  bar.style.transform = 'scaleX(0)';
+
+  // force browser to render that state
+  void bar.offsetWidth;
+
+  // start smooth animation
   setTimeout(() => {
     loader.classList.add('animate');
-  }, 120);
+  }, 200);
 
-  // hide after animation fully completes
+  // hide loader after animation
   setTimeout(() => {
     loader.classList.add('hidden');
-  }, 4200);
+  }, 4300);
 });
 
     // ── ACTIVE NAV HIGHLIGHT ──────────────────────────
