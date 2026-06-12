@@ -1744,8 +1744,12 @@ document.addEventListener('mouseup',   () => dot.classList.remove('clicking'));
     // ── SCROLL REVEAL ─────────────────────────────────
   // ── PREMIUM STAGGER REVEAL ─────────────────────
 
+// ── PREMIUM STAGGER REVEAL ─────────────────────
+
 const revealItems =
-  document.querySelectorAll('.reveal');
+  document.querySelectorAll(
+    '.skill-card.reveal, .project-card.reveal, .info-card.reveal'
+  );
 
 const revealObserver =
   new IntersectionObserver(
