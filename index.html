@@ -620,10 +620,22 @@
   box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
 }
     .roadmap-dot.done {
-      border-color: var(--green);
-      color: var(--green);
-      background: var(--green-dim);
-    }
+  border-color: var(--green);
+  color: var(--green);
+  background: rgba(34, 197, 94, 0.08);
+  position: relative;
+}
+
+/* center dot for completed phase */
+.roadmap-dot.done::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  position: absolute;
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+}
     .roadmap-content {
       padding-top: 0px; flex: 1;
     }
@@ -1250,7 +1262,7 @@
     <div class="roadmap-track reveal">
 
       <div class="roadmap-item">
-        <div class="roadmap-dot done">✓</div>
+        <div class="roadmap-dot done"></div>
         <div class="roadmap-content">
           <div class="roadmap-phase">Phase 1 · Done</div>
           <div class="roadmap-title">Foundation — C Fundamentals + Python Setup</div>
