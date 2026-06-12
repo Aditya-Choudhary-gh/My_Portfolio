@@ -79,6 +79,7 @@
       background: rgba(9, 8, 16, 0.85);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
+      gap: 24px;
     }
 
     .nav-logo {
@@ -92,6 +93,7 @@
 
     .nav-links {
       display: flex; gap: 32px; list-style: none;
+      flex-shrink: 0; /* add this — stops links from collapsing */
     }
     .nav-links a {
       font-family: var(--mono);
@@ -179,9 +181,11 @@
       border: 1px solid var(--border);
       border-radius: 10px;
       max-width: 720px;
-width: 100%;
+      width: 100%;
       margin-bottom: 48px;
       overflow: hidden;
+      flex: 1;
+      min-width: 0; /* critical — prevents flex overflow */
     }
     .terminal-bar {
       display: flex; align-items: center; gap: 8px;
@@ -779,14 +783,14 @@ width: 100%;
 }
 
 .hero-photo-wrapper {
-  width: 500px;
-  min-height: 540px;
+  width: 320px;
+  min-height: 380px;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid rgba(139, 111, 232, 0.22);
   background: var(--bg-card);
   flex-shrink: 0;
-  margin-left: auto;
+  margin-left: 0;
   display: flex;
 }
 
@@ -821,7 +825,7 @@ width: 100%;
 
   <!-- ── HERO ── -->
   <section id="hero">
-    <div class="hero-label">Available for Internships — Summer 2026</div>
+    <div class="hero-label">Open to Internships &amp; Collaborations</div>
 
     <div class="hero-name">Aditya Choudhary</div>
     <div class="hero-role">
@@ -872,8 +876,8 @@ width: 100%;
         <div class="stat-label">Projects Shipped</div>
       </div>
       <div>
-        <div class="stat-num">3</div>
-        <div class="stat-label">Core Languages</div>
+        <div class="stat-num">87<span>%</span></div>
+        <div class="stat-label">Burnout Model Accuracy</div>
       </div>
       <div>
         <div class="stat-num">∞</div>
@@ -1048,7 +1052,7 @@ width: 100%;
           </div>
           <div class="project-title">Student Burnout Predictor</div>
           <div class="project-desc">
-            ML model that predicts burnout levels from academic, lifestyle, and habit data. Integrated SHAP explainability — not just a prediction but a breakdown of <em>which</em> factors drive it. My first end-to-end ML project: data processing, model training, evaluation, and deployment.
+           End-to-end ML model trained on <strong style="color:var(--green)">1,040 records</strong> across <strong style="color:var(--green)">40 features</strong>, achieving <strong style="color:var(--green)">99.5% accuracy</strong>. Integrated SHAP explainability — not just a prediction but a per-student breakdown of <em>which</em> factors drive burnout. First fully deployed ML project: data processing, model training, evaluation, and Tkinter GUI.
           </div>
           <div class="project-tags">
             <span class="tag">Python</span>
@@ -1069,6 +1073,8 @@ width: 100%;
             <div class="metric">SHAP</div>
             <div class="metric-label">Explainability</div>
             <div class="metric-sub">Feature-level prediction<br>breakdowns per student</div>
+            <div style="font-family:var(--display);font-size:28px;font-weight:700;color:var(--blue);margin-top:20px;">99.5%</div>
+            <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.12em;color:var(--text-muted);text-transform:uppercase;margin-top:4px;">Model Accuracy</div>
           </div>
         </div>
       </div>
@@ -1246,7 +1252,7 @@ width: 100%;
   <!-- ── FOOTER ── -->
   <footer>
     <div class="footer-copy">
-      Built by <span>Aditya Choudhary</span> · Dehradun, India · 2025
+      Built by <span>Aditya Choudhary</span> · Dehradun, India · 2026
     </div>
     <div class="footer-links">
       <a href="https://github.com/Aditya-Choudhary-gh" target="_blank">GitHub</a>
