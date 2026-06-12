@@ -172,6 +172,7 @@
 .loader-progress-bar {
   position: relative;
   width: 100%;
+  transform: scaleX(0);
   height: 100%;
 
   background: linear-gradient(
@@ -1745,19 +1746,21 @@ if (roadmap) {
       }, 3000);
     }
 
-    // ── FAANG LOADER ──────────────────────────
+ // ── FAANG LOADER ──────────────────────────
 window.addEventListener('load', () => {
   const loader = document.getElementById('loader');
 
-  // trigger animation after loader appears
-  requestAnimationFrame(() => {
-    loader.classList.add('animate');
-  });
+  if (!loader) return;
 
-  // hide loader after animation finishes
+  // wait a tiny bit so bar starts from 0
+  setTimeout(() => {
+    loader.classList.add('animate');
+  }, 120);
+
+  // hide after animation fully completes
   setTimeout(() => {
     loader.classList.add('hidden');
-  }, 3200);
+  }, 4200);
 });
 
     // ── ACTIVE NAV HIGHLIGHT ──────────────────────────
@@ -1777,18 +1780,6 @@ window.addEventListener('load', () => {
       { threshold: 0.4 }
     );
     sections.forEach(s => navObserver.observe(s));
- <script>
-window.addEventListener('load', () => {
-  const loader = document.getElementById('loader');
 
-  setTimeout(() => {
-    loader.classList.add('animate');
-  }, 80);
-
-  setTimeout(() => {
-    loader.classList.add('hidden');
-  }, 3900);
-});
-</script>
 </body>
 </html>
