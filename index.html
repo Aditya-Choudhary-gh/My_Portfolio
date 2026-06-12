@@ -1113,7 +1113,25 @@
     /* ── RESPONSIVE ────────────────────────────────── */
    /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
-  nav { padding: 16px 24px; }
+  nav {
+  padding: 14px 18px;
+  justify-content: space-between;
+  align-items: center;
+}
+  .nav-cta {
+  display: none;
+}
+
+  .menu-toggle {
+  display: block;
+  margin-left: auto;
+  font-size: 26px;
+}
+
+  .nav-links {
+  z-index: 999;
+}
+  
   section { padding: 60px 20px; }
   .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .projects-grid { grid-template-columns: 1fr; }
@@ -1946,7 +1964,7 @@ window.addEventListener('load', () => {
   // animate width
   setTimeout(() => {
     bar.style.transition =
-      'width 3.8s cubic-bezier(0.22, 1, 0.36, 1)';
+      'width 1.8s cubic-bezier(0.22, 1, 0.36, 1)'
     bar.style.width = '100%';
   }, 220);
 
@@ -1956,8 +1974,8 @@ window.addEventListener('load', () => {
 
     setTimeout(() => {
       typeTerminal();
-    }, 400);
-  }, 4300);
+    }, 180);
+  }, 2200);
 
   // ── ACTIVE NAV HIGHLIGHT ──────────────────────────
   const sections = document.querySelectorAll('section[id]');
