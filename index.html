@@ -824,14 +824,12 @@
 
  /* ── CUSTOM CURSOR ── */
 @media (hover: hover) and (pointer: fine) {
-  *, *::before, *::after {
-    cursor: none !important;
-  }
+  *, *::before, *::after { cursor: none !important; }
 }
 
 .cursor-dot {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   background: var(--blue);
   border-radius: 50%;
   position: fixed;
@@ -839,34 +837,35 @@
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: transform 0.1s ease, background 0.2s ease;
+  will-change: left, top;
 }
 
 .cursor-ring {
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(139, 111, 232, 0.5);
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid rgba(139, 111, 232, 0.6);
   border-radius: 50%;
   position: fixed;
   top: 0; left: 0;
   pointer-events: none;
   z-index: 9998;
   transform: translate(-50%, -50%);
-  transition: transform 0.08s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+  transition: width 0.4s ease, height 0.4s ease,
+              border-color 0.4s ease, background 0.4s ease;
+  will-change: left, top;
 }
 
-/* Hover state — ring expands and glows */
 .cursor-ring.hovering {
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
   border-color: var(--blue);
-  background: rgba(139, 111, 232, 0.06);
+  background: rgba(139, 111, 232, 0.07);
 }
 
-/* Click state — dot pulses */
 .cursor-dot.clicking {
-  transform: translate(-50%, -50%) scale(2.5);
+  transform: translate(-50%, -50%) scale(3);
   background: var(--green);
+  transition: transform 0.1s ease, background 0.1s ease;
 }
     
   </style>
@@ -1336,36 +1335,39 @@
   <script>
 
     // ── CUSTOM CURSOR ──
+// ── CUSTOM CURSOR ──
 const dot = document.getElementById('cursorDot');
 const ring = document.getElementById('cursorRing');
 
 let mouseX = 0, mouseY = 0;
 let ringX = 0, ringY = 0;
+let dotX = 0, dotY = 0;
 
 document.addEventListener('mousemove', (e) => {
   mouseX = e.clientX;
   mouseY = e.clientY;
-  dot.style.left = mouseX + 'px';
-  dot.style.top  = mouseY + 'px';
 });
 
-// Ring follows with slight lag for premium feel
-function animateRing() {
-  ringX += (mouseX - ringX) * 0.12;
-  ringY += (mouseY - ringY) * 0.12;
+function animateCursor() {
+  dotX += (mouseX - dotX) * 0.85;
+  dotY += (mouseY - dotY) * 0.85;
+  dot.style.left = dotX + 'px';
+  dot.style.top  = dotY + 'px';
+
+  ringX += (mouseX - ringX) * 0.08;
+  ringY += (mouseY - ringY) * 0.08;
   ring.style.left = ringX + 'px';
   ring.style.top  = ringY + 'px';
-  requestAnimationFrame(animateRing);
-}
-animateRing();
 
-// Hover effect on interactive elements
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
 document.querySelectorAll('a, button, .skill-card, .project-card, .info-card').forEach(el => {
   el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
   el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
 });
 
-// Click pulse
 document.addEventListener('mousedown', () => dot.classList.add('clicking'));
 document.addEventListener('mouseup',   () => dot.classList.remove('clicking'));
     // ── SCROLL REVEAL ─────────────────────────────────
