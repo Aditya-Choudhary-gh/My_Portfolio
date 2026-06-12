@@ -156,12 +156,27 @@
     var(--blue)
   );
 
-  animation: loadingBar 2.5s
-    cubic-bezier(0.22, 1, 0.36, 1)
-    forwards;
+  transform-origin: left;
+  transform: scaleX(0);
 
   box-shadow:
     0 0 14px rgba(62,255,163,0.25);
+}
+
+/* start animation only when loader is active */
+#loader.animate .loader-progress-bar {
+  animation: loadingBar 2.8s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+@keyframes loadingBar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 @keyframes loadingBar {
@@ -1675,9 +1690,15 @@ if (roadmap) {
 window.addEventListener('load', () => {
   const loader = document.getElementById('loader');
 
+  // trigger animation after loader appears
+  requestAnimationFrame(() => {
+    loader.classList.add('animate');
+  });
+
+  // hide loader after animation finishes
   setTimeout(() => {
     loader.classList.add('hidden');
-  }, 2800);
+  }, 3200);
 });
 
     // ── ACTIVE NAV HIGHLIGHT ──────────────────────────
