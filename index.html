@@ -84,6 +84,7 @@
   transition:
     opacity 0.9s ease,
     visibility 0.9s ease;
+  animation: none; /* ← add this */
 }
 
 #loader.hidden {
@@ -132,6 +133,7 @@
 
   animation:
     loaderFade 0.55s ease forwards;
+  will-change: opacity, transform; /* ← add this */
 }
 
 .loader-prompt {
