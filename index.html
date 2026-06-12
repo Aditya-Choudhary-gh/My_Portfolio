@@ -138,6 +138,40 @@
   color: var(--green);
   margin-top: 14px;
 }
+    .loader-progress {
+  width: 100%;
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.loader-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--green),
+    var(--blue)
+  );
+
+  animation: loadingBar 2.5s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+
+  box-shadow:
+    0 0 14px rgba(62,255,163,0.25);
+}
+
+@keyframes loadingBar {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
 
 @keyframes loaderFade {
   to {
@@ -1058,6 +1092,12 @@
       <div class="loader-line delay-3 ready">
         Ready.
       </div>
+
+      <div class="loader-progress">
+  <div class="loader-progress-bar"></div>
+</div>
+
+      
     </div>
 
   </div>
