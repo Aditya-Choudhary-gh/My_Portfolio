@@ -724,6 +724,25 @@
       footer { flex-direction: column; gap: 12px; padding: 24px; text-align: center; }
       .hero-stats { gap: 28px; flex-wrap: wrap; }
     }
+    .hero-terminal-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  margin-bottom: 48px;
+}
+.hero-terminal-row .terminal {
+  margin-bottom: 0;
+  flex: 1;
+}
+.hero-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 12px;
+  object-fit: cover;
+  object-position: top;
+  border: 1px solid rgba(139, 111, 232, 0.35);
+  flex-shrink: 0;
+}
   </style>
 </head>
 <body>
@@ -756,7 +775,8 @@
     </div>
 
     <!-- Terminal -->
-    <div class="terminal">
+    <div class="hero-terminal-row">
+  <div class="terminal">
       <div class="terminal-bar">
         <div class="dot dot-red"></div>
         <div class="dot dot-yellow"></div>
@@ -774,7 +794,9 @@
         <span><span class="t-prompt">$ </span><span class="t-cmd">echo "ready to build"</span></span><br>
         <span class="t-out">ready to build <span class="t-cursor"></span></span>
       </div>
-    </div>
+   </div>
+  <img src="IMG_20260428_022705.jpg" alt="Aditya Choudhary" class="hero-photo" />
+</div>
 
     <div class="hero-actions">
       <a href="#projects" class="btn-primary">View Projects →</a>
