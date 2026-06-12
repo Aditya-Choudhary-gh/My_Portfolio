@@ -380,6 +380,21 @@
       font-size: 13px;
       line-height: 1.8;
     }
+
+    .typing-terminal {
+  margin: 0;
+  white-space: pre-wrap;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+.typing-terminal::after {
+  content: "|";
+  color: var(--green);
+  animation: blink 0.8s infinite;
+}
     .t-prompt { color: var(--blue); }
     .t-cmd    { color: var(--text-primary); }
     .t-out    { color: var(--text-secondary); padding-left: 16px; display: block; }
@@ -391,17 +406,7 @@
       animation: blink 1s step-end infinite;
       vertical-align: middle;
     }
-    .typing {
-  overflow: hidden;
-  white-space: nowrap;
-  width: 0;
-  animation: typing 2s steps(30, end) forwards;
-}
 
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
 
     @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
 
@@ -1191,20 +1196,11 @@
         <div class="dot dot-green"></div>
         <span class="terminal-title">aditya@dev ~ profile.sh</span>
       </div>
-      <div class="terminal-body">
-       <span class="typing">
-  <span class="t-prompt">$ </span>
-  <span class="t-cmd">./whoami --verbose</span>
-</span>
-        <span class="t-out"><strong>name</strong>       <span class="val">Aditya Choudhary</span></span>
-        <span class="t-out"><strong>status</strong>     <span class="val">2nd Year CS @ UPES Dehradun</span></span>
-        <span class="t-out"><strong>focus</strong>      <span class="val">ML Engineering · DSA · Systems</span></span>
-        <span class="t-out"><strong>languages</strong>  <span class="val">C++, Python, C, JavaScript</span></span>
-        <span class="t-out"><strong>location</strong>   <span class="val">Dehradun, India 30.31°N 78.03°E</span></span>
-        <br>
-        <span><span class="t-prompt">$ </span><span class="t-cmd">echo "ready to build"</span></span><br>
-        <span class="t-out">ready to build <span class="t-cursor"></span></span>
-      </div>
+
+    <div class="terminal-body">
+  <pre id="typing-terminal" class="typing-terminal"></pre>
+</div>
+     
    </div>
  <div class="hero-photo-wrapper">
   <img
@@ -1639,7 +1635,31 @@
 </script>
   <script>
     
+// ── TERMINAL TYPING EFFECT ─────────────────────────
 
+const terminal = document.getElementById("typing-terminal");
+
+const terminalText = `$ ./whoami --verbose
+
+name       Aditya Choudhary
+status     2nd Year CS @ UPES Dehradun
+focus      ML Engineering · DSA · Systems
+languages  C++, Python, C, JavaScript
+location   Dehradun, India 30.31°N 78.03°E
+
+$ echo "ready to build"
+ready to build`;
+
+let terminalIndex = 0;
+
+function typeTerminal() {
+  if (terminalIndex < terminalText.length) {
+    terminal.textContent += terminalText.charAt(terminalIndex);
+    terminalIndex++;
+
+    setTimeout(typeTerminal, 14);
+  }
+}
     // ── CUSTOM CURSOR ──
 // ── CUSTOM CURSOR ──
 const dot = document.getElementById('cursorDot');
@@ -1782,35 +1802,44 @@ window.addEventListener('load', () => {
     loader.classList.add('animate');
   }, 200);
 
-  // animate width 0 → 100% over 3.8s
+  // animate width
   setTimeout(() => {
-    bar.style.transition = 'width 3.8s cubic-bezier(0.22, 1, 0.36, 1)';
+    bar.style.transition =
+      'width 3.8s cubic-bezier(0.22, 1, 0.36, 1)';
     bar.style.width = '100%';
   }, 220);
 
   // hide loader
   setTimeout(() => {
     loader.classList.add('hidden');
-  }, 4300);
-});
 
-    // ── ACTIVE NAV HIGHLIGHT ──────────────────────────
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    const navObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            navLinks.forEach(a => {
-              a.style.color = a.getAttribute('href') === '#' + e.target.id
-                ? 'var(--text-primary)' : '';
-            });
-          }
-        });
-      },
-      { threshold: 0.4 }
-    );
-    sections.forEach(s => navObserver.observe(s));
+    setTimeout(() => {
+      typeTerminal();
+    }, 400);
+  }, 4300);
+
+  // ── ACTIVE NAV HIGHLIGHT ──────────────────────────
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const navObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          navLinks.forEach((a) => {
+            a.style.color =
+              a.getAttribute('href') === '#' + e.target.id
+                ? 'var(--text-primary)'
+                : '';
+          });
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+
+  sections.forEach((s) => navObserver.observe(s));
+});
   </script>
 
 </body>
