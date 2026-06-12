@@ -1014,17 +1014,22 @@
     .footer-links a:hover { color: var(--text-primary); }
 
     /* ── SCROLL REVEAL ─────────────────────────────── */
-   .reveal {
+  /* ── PREMIUM SCROLL REVEAL ───────────────────── */
+
+.reveal {
   opacity: 0;
-  transform: translateY(40px) scale(0.985);
-  filter: blur(8px);
+  transform: translateY(60px) scale(0.97);
+  filter: blur(12px);
+
   transition:
-    opacity 1s cubic-bezier(0.16,1,0.3,1),
-    transform 1s cubic-bezier(0.16,1,0.3,1),
+    opacity 1s cubic-bezier(0.22,1,0.36,1),
+    transform 1s cubic-bezier(0.22,1,0.36,1),
     filter 1s ease;
+
+  will-change: transform, opacity;
 }
 
-.reveal.visible {
+.reveal.show {
   opacity: 1;
   transform: translateY(0) scale(1);
   filter: blur(0);
@@ -1261,7 +1266,7 @@
     <div class="section-eyebrow">01 · About</div>
     <div class="section-title">Who I am, without the buzzwords.</div>
 
-    <div class="about-grid reveal">
+   <div class="about-grid">
       <div class="about-text">
         <p>
           I'm a second-year CS student at UPES Dehradun who started coding out of curiosity and stayed because I liked building things that actually work. I enjoy turning ideas into real systems — whether that’s ML models, automation tools, or solving algorithmic problems one bug at a time.
@@ -1278,31 +1283,31 @@
       </div>
 
       <div class="about-cards">
-        <div class="info-card">
+        <div class="info-card reveal">
           <div>
             <div class="info-label">Education</div>
             <div class="info-value">B.Tech CS · UPES Dehradun · Sem II</div>
           </div>
         </div>
-        <div class="info-card">
+        <div class="info-card reveal">
           <div>
             <div class="info-label">Primary Goal</div>
             <div class="info-value">Building Real-life Projects</div>
           </div>
         </div>
-        <div class="info-card">
+        <div class="info-card reveal">
           <div>
             <div class="info-label">Active Focus Areas</div>
             <div class="info-value">ML Engineering · DSA (C++) · NLP</div>
           </div>
         </div>
-        <div class="info-card">
+        <div class="info-card reveal">
           <div>
             <div class="info-label">Coding Since</div>
             <div class="info-value">2025 · Self-directed from day one</div>
           </div>
         </div>
-        <div class="info-card">
+        <div class="info-card reveal">
           <div>
             <div class="info-label">Location</div>
             <div class="info-value">Dehradun, Uttarakhand, India</div>
@@ -1322,9 +1327,9 @@
       Honest assessments. No "proficiency in Kubernetes" — just where I genuinely am.
     </div>
 
-    <div class="skills-grid reveal">
+   <div class="skills-grid">
 
-      <div class="skill-card">
+      <div class="skill-card reveal">
         <div class="skill-header">
           <span class="skill-name">C Language</span>
           <span class="skill-pct">82%</span>
@@ -1333,7 +1338,7 @@
         <div class="skill-note">Most comfortable · manual memory · pointer math</div>
       </div>
 
-      <div class="skill-card">
+      <div class="skill-card reveal">
         <div class="skill-header">
           <span class="skill-name">C++</span>
           <span class="skill-pct">62%</span>
@@ -1342,7 +1347,7 @@
         <div class="skill-note">Active on Striver A2Z · STL daily · improving fast</div>
       </div>
 
-      <div class="skill-card">
+      <div class="skill-card reveal">
         <div class="skill-header">
           <span class="skill-name">Python</span>
           <span class="skill-pct">55%</span>
@@ -1351,7 +1356,7 @@
         <div class="skill-note">NumPy · Pandas · scikit-learn · Flask basics</div>
       </div>
 
-      <div class="skill-card">
+      <div class="skill-card reveal">
         <div class="skill-header">
           <span class="skill-name">Machine Learning</span>
           <span class="skill-pct">45%</span>
@@ -1360,7 +1365,7 @@
         <div class="skill-note">linear/logistic regression · SHAP · scikit-learn</div>
       </div>
 
-      <div class="skill-card">
+      <div class="skill-card reveal">
         <div class="skill-header">
           <span class="skill-name">HTML / CSS</span>
           <span class="skill-pct">78%</span>
@@ -1369,7 +1374,7 @@
         <div class="skill-note">Comfortable · can build and ship from scratch</div>
       </div>
 
-      <div class="skill-card">
+      <div class="skill-card reveal">
         <div class="skill-header">
           <span class="skill-name">JavaScript</span>
           <span class="skill-pct">38%</span>
@@ -1378,7 +1383,7 @@
         <div class="skill-note">DOM manipulation · basic async · still learning</div>
       </div>
 
-      <div class="skill-card">
+      <div class="skill-card reveal">
         <div class="skill-header">
           <span class="skill-name">NLP / Text Processing</span>
           <span class="skill-pct">30%</span>
@@ -1387,7 +1392,7 @@
         <div class="skill-note">TF-IDF · spaCy NER · cosine similarity (learning)</div>
       </div>
 
-      <div class="skill-card">
+      <div class="skill-card reveal">
         <div class="skill-header">
           <span class="skill-name">Shell / Linux</span>
           <span class="skill-pct">35%</span>
@@ -1416,7 +1421,8 @@
         <div class="project-content">
           <div class="project-top">
             <div class="project-icon" aria-hidden="true">ML</div>
-            <span class="project-status status-live">Live</span>
+            <span class="project-status status-live">Live</span>+
+            
           </div>
           <div class="project-title">Student Burnout Predictor</div>
           <div class="project-desc">
@@ -1574,7 +1580,7 @@
     <div class="section-eyebrow">05 · Contact</div>
     <div class="section-title">Let's connect.</div>
 
-    <div class="contact-grid reveal">
+   <div class="contact-grid">
       <div>
         <div class="contact-lead">
           I'm a second-year student, not a senior engineer — but I ship real things and I reply to emails.
@@ -1736,22 +1742,44 @@ document.querySelectorAll('a, button, .skill-card, .project-card, .info-card').f
 document.addEventListener('mousedown', () => dot.classList.add('clicking'));
 document.addEventListener('mouseup',   () => dot.classList.remove('clicking'));
     // ── SCROLL REVEAL ─────────────────────────────────
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add('visible');
-            // stagger children if there are multiple
-            const children = e.target.querySelectorAll('.skill-card, .project-card, .roadmap-item, .info-card');
-            children.forEach((child, i) => {
-              setTimeout(() => child.style.opacity = '1', i * 80);
-            });
-          }
-        });
-      },
-      { threshold: 0.08 }
-    );
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // ── PREMIUM STAGGER REVEAL ─────────────────────
+
+const revealItems =
+  document.querySelectorAll('.reveal');
+
+const revealObserver =
+  new IntersectionObserver(
+    (entries) => {
+
+      entries.forEach((entry) => {
+
+        if (entry.isIntersecting) {
+
+          const siblings =
+            [...entry.target.parentElement.children];
+
+          const index =
+            siblings.indexOf(entry.target);
+
+          setTimeout(() => {
+            entry.target.classList.add('show');
+          }, index * 140);
+
+          revealObserver.unobserve(
+            entry.target
+          );
+        }
+      });
+
+    },
+    {
+      threshold: 0.12
+    }
+  );
+
+revealItems.forEach((item) => {
+  revealObserver.observe(item);
+});
     const roadmap = document.querySelector('.roadmap-track');
 
 const roadmapObserver = new IntersectionObserver(
