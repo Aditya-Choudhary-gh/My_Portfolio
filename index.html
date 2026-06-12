@@ -590,19 +590,45 @@
       display: flex; flex-direction: column; gap: 0;
       position: relative;
     }
-    .roadmap-track::before {
-      content: '';
-      position: absolute;
-      left: 19px; top: 30px; bottom: 30px;
-      width: 2px;
-       background: linear-gradient(
+   .roadmap-track::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 30px;
+  bottom: 30px;
+  width: 2px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.16) 0%,
+      rgba(255,255,255,0.16) 100%
+    );
+}
+
+/* animated green progress */
+.roadmap-track::after {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 30px;
+  width: 2px;
+  height: 0%;
+  box-shadow: 0 0 18px rgba(34,197,94,0.45);
+
+  background: linear-gradient(
     to bottom,
-    var(--green) 0%,
-    var(--green) 44%,
-    rgba(255,255,255,0.16) 44%,
-    rgba(255,255,255,0.16) 100%
+    var(--green),
+    rgba(34,197,94,0.75)
   );
-    }
+
+  transition: height 1.4s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* when visible */
+.roadmap-track.animate::after {
+  height: 44%;
+}
 
     .roadmap-item {
       display: flex; gap: 32px; align-items: center;
@@ -1437,6 +1463,22 @@ document.addEventListener('mouseup',   () => dot.classList.remove('clicking'));
       { threshold: 0.08 }
     );
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    const roadmap = document.querySelector('.roadmap-track');
+
+const roadmapObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        roadmap.classList.add('animate');
+      }
+    });
+  },
+  { threshold: 0.35 }
+);
+
+if (roadmap) {
+  roadmapObserver.observe(roadmap);
+}
 
     // ── SKILL BAR ANIMATION ───────────────────────────
     const skillObserver = new IntersectionObserver(
