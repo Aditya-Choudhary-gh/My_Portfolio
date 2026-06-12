@@ -177,44 +177,48 @@
   background: linear-gradient(
     90deg,
     #22c55e 0%,
-    #6ee7b7 40%,
-    #a78bfa 100%
+    #6ee7b7 35%,
+    #c4b5fd 70%,
+    #8b5cf6 100%
   );
 
   transform: scaleX(0);
   transform-origin: left center;
   will-change: transform;
 
+  border-radius: 999px;
+
+  /* glow */
   box-shadow:
-    0 0 18px rgba(34,197,94,0.45),
-    0 0 42px rgba(167,139,250,0.24);
-
-  overflow: hidden;
-
-  /* IMPORTANT */
-  transform: scaleX(0);
-  transform-origin: left center;
-  will-change: transform;
-  transition: none;
+    0 0 12px rgba(34,197,94,0.7),
+    0 0 28px rgba(34,197,94,0.35),
+    0 0 45px rgba(139,92,246,0.28);
 }
 
 /* glowing sweep effect */
 .loader-progress-bar::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: -30%;
-  width: 28%;
-  height: 100%;
+  inset: 0;
 
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255,255,255,0.9),
+    rgba(255,255,255,0.35),
     transparent
   );
 
-  filter: blur(4px);
+  animation: shimmer 1.8s linear infinite;
+}
+
+    @keyframes shimmer {
+  from {
+    transform: translateX(-120%);
+  }
+
+  to {
+    transform: translateX(120%);
+  }
 }
 
 /* animate fill */
