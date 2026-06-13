@@ -39,7 +39,7 @@
       /* ── TEXT ── */
       --text-primary:  #EEEAFF;          /* slightly warmer white */
       --text-secondary:#9492B4;          /* was #8A8AAB — more readable */
-      --text-muted:    #524F72;          /* was #4A4568 — bumped for skill notes */
+      --text-muted:    #5E5A82;         /* was #4A4568 — bumped for skill notes */
 
       /* ── TYPE ── */
       --display: 'Space Grotesk', sans-serif;
@@ -240,9 +240,7 @@
     section {
       position: relative; z-index: 1;
       max-width: 1400px; width: 92%;
-      margin: 0 auto; padding: 100px 20px;
-    }
-
+      margin: 0 auto; padding: 88px 20px;
     /* ── HERO ───────────────────────────────────────── */
     #hero {
       min-height: 100vh;
@@ -267,8 +265,8 @@
 
     .hero-role {
       font-family: var(--display);
-      font-size: clamp(22px, 3.2vw, 38px); font-weight: 300;
-      color: var(--text-secondary); margin-bottom: 36px; letter-spacing: -0.01em;
+      font-size: clamp(20px, 2.8vw, 34px); font-weight: 300;
+      color: var(--text-secondary); margin-bottom: 36px; letter-spacing: -0.02em;
     }
     .hero-role em { font-style: normal; color: var(--blue-bright); font-weight: 500; }
 
@@ -331,8 +329,8 @@
     }
 
     .hero-stats {
-      display: flex; gap: 48px; margin-top: 64px;
-      padding-top: 40px; border-top: 1px solid var(--border);
+      display: flex; gap: 40px; margin-top: 56px;
+      padding-top: 32px; border-top: 1px solid var(--border);
     }
     .stat-num {
       font-family: var(--display); font-size: 36px; font-weight: 700; color: var(--text-primary);
@@ -357,7 +355,7 @@
     }
     .section-sub {
       font-size: 16px; color: var(--text-secondary);
-      max-width: 560px; line-height: 1.7; margin-bottom: 56px;
+      max-width: 480px; line-height: 1.7; margin-bottom: 56px;
     }
 
     /* ── DIVIDER ────────────────────────────────────── */
@@ -365,7 +363,7 @@
 
     /* ── ABOUT ──────────────────────────────────────── */
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-    .about-text p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px; font-size: 15px; }
+    .about-text p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px; font-size: 15px; max-width: 520px; }
     .about-text p strong { color: var(--text-primary); font-weight: 600; }
     .about-cards { display: flex; flex-direction: column; gap: 14px; }
 
